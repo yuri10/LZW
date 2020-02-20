@@ -89,7 +89,7 @@ mensagem = mensagem + EOF
 tempos_k = []
 
 #faz para K valendo de 9 a 16
-for k in range(12,17):
+for k in range(9,15):
     #pega o tempo de execucao
     tempo_inicial = time.time()
     #Saida Codificada
@@ -129,20 +129,21 @@ for k in range(12,17):
     #saida_lida = le_saida(k)
     #print(saida_lida)
 
-
+'''
 #graficos
-'''    
+   
 statinfo = os.stat("C:/Users/Yuri Oliveira/Desktop/corpus16MB.txt")
 tamanho_corpus = statinfo.st_size
 
 tamanho_saidas = []
-for i in range(9,14):
+for i in range(9,17):
     statinfo = os.stat("C:/Users/Yuri Oliveira/Desktop/lzw_saida_"+ str(i) + ".txt")
     tamanho_saidas.append(int(statinfo.st_size/8))
 
 #RC - Razão de Compressão (tamanho original / tamanho comprimido)
 RC = [tamanho_corpus/ts for ts in tamanho_saidas]
-
+'''
+'''
 #plt.bar(list(range(9,14)), RC, color = 'blue')
 plt.title('RC x K')
 plt.ylabel('Razão de Compressão')
