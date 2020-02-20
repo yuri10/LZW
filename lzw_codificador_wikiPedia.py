@@ -26,7 +26,6 @@ def binario(b, k):
 #Salva a saida codificada em um arquivo
 def salva_saida(saida, k):
     arq = open("C:/Users/Yuri Oliveira/Desktop/lzw_saida_" + str(k) + ".txt","w+")
-    #arq.write(binario(9, k))
     
     for s in saida:
         arq.write(binario(s, k))
@@ -44,12 +43,37 @@ def le_saida(k):
         saida_lzw.append(int(str(conteudo[i*k:(i+1)*k]), 2))
     arq.close()
     return saida_lzw
+
+def lzw_decode(leitura):
+
+    #Iniciando o dicionario
+    dic_tamanho = 256
+    dicionario = dict([(x, chr(x)) for x in range(dic_tamanho)])
+    
+    w = ""
+    resultado=""
+    proximo=256
+    #LZW DECODE
+
+    for dado in leitura:
+        if not (dado in dicionario):
+            dicionario[dado] = w + w[0]
+        resultado += dicionario[dado]
+        if not(len(w)==0):
+            dicionario[proximo] = w + (dicionario[dado][0])
+            proximo+=1
+        w = dicionario[dado]
+
+    return resultado
     
 #LZW_WikiPedia
 
-#Mensagem que será codificada    
-mensagem = "ABRACADABRA"
+#Mensagem que será codificada  
 
+mensagem = arq = open("C:/Users/Yuri Oliveira/Desktop/corpus16MB.txt","r+")
+mensagem = arq.read()
+#mensagem = "ABRACADABRA"
+arq.close()
 #Dicionario 
 #dic_inicial = []  #cria um dicionario vazio     
 #criaDic(mensagem)   #cria o dicionario inicial baseado na mensagem   
@@ -67,7 +91,7 @@ mensagem = mensagem + EOF
 
 
 #faz para K valendo de 9 a 16
-for k in range(9,17):
+for k in range(9,10):
     #Saida Codificada
     saida = []
     #variaveis auxiliar
@@ -104,5 +128,8 @@ for k in range(9,17):
     salva_saida(saida, k)
     saida_lida = le_saida(k)
     print(saida_lida)
+
+
+
 
 
