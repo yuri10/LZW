@@ -40,7 +40,7 @@ def le_saida(k):
     arq = open("C:/Users/Yuri Oliveira/Desktop/lzw_saida_" + str(k) + ".txt","r+")
     conteudo = arq.read()
     print(conteudo)
-    for i in range(k):
+    for i in range(int(len(conteudo)/k)):
         saida_lzw.append(int(str(conteudo[i*k:(i+1)*k]), 2))
     arq.close()
     return saida_lzw
